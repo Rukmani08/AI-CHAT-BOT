@@ -6,10 +6,10 @@ import path from 'path';
 const app = express();
 
 // Serve the frontend files from the /docs directory
-app.use(express.static(path.join(__dirname, '../../docs')));
+app.use(express.static(path.join(__dirname, '../..')));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../docs/index.html'));
+  res.sendFile(path.join(__dirname, '../..', 'index.html'));
 });
 
 //connection and listners
