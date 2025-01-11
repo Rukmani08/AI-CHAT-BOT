@@ -6,10 +6,10 @@ import path from 'path';
 const app = express();
 
 // Serve the frontend files from the public folder
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'backend-public')));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/index.html'));
+  res.sendFile(path.join(__dirname, 'backend-public/index.html'));
 });
 
 //connection and listners
