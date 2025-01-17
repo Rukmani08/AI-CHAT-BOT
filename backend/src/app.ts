@@ -23,4 +23,10 @@ app.use(morgan("dev"));
 app.use("/api/v1", appRouter);
 
 
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).json({ message: "Internal Server Error" });
+});
+
+
 export default app;
