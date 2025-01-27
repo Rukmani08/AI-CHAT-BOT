@@ -35,7 +35,7 @@ export  const userSignup: RequestHandler = async (req:Request,res:Response,next:
         domain:"localhost", signed:true, path:"/",
       })    
 
-     const token = createToken(user._id.toString(), user.email, "7d")
+     const token = createToken(user._id.toString(), user.email,  604800)
      const expires=new Date();
      expires.setDate(expires.getDate()+7)
      res.cookie(COOKIE_NAME,token, {path:"/",  domain:"localhost", expires, httpOnly:true, signed:true,})
@@ -69,7 +69,7 @@ export  const userLogin: RequestHandler= async (req:Request,res:Response,next:Ne
             path:"/",
           })    
 
-         const token = createToken(user._id.toString(), user.email, "7d")
+         const token = createToken(user._id.toString(), user.email,  604800)
          const expires=new Date();
          expires.setDate(expires.getDate()+7)
          res.cookie(COOKIE_NAME,token, {path:"/",  domain:"localhost", expires, httpOnly:true, signed:true,})
