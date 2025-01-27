@@ -3,7 +3,8 @@ import { connectionToDatabase } from "./db/connection.js";
 
 
 //connection and listners
-const PORT= process.env.REACT_APP_API_URL || 3000;
+const url = new URL(process.env.REACT_APP_API_URL!);
+const PORT= url.port || 80;
 connectionToDatabase()
 .then(()=>{
 
