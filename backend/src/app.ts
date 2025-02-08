@@ -12,7 +12,7 @@ const app = express();
 
 
 //Middlewares
-app.use(cors({origin:['https://ai-chat-bot-tan-delta.vercel.app/', 'http://localhost:5173'], credentials: true}))
+app.use(cors({origin:['https://ai-chat-bot-tan-delta.vercel.app', 'http://localhost:5173'], credentials: true}))
 app.options('*', cors({ credentials: true, optionsSuccessStatus: 204 }));
 app.use(express.json());
 app.use(cookieParser(process.env.COOKIE_SECRET))
