@@ -19,14 +19,24 @@ app.use(cookieParser(process.env.COOKIE_SECRET))
 //remove it in production
 app.use(morgan("dev"));
 
+app.get("/", (req, res, next) => {
+    try {
+      res.status(200).json({
+        message: "OK",
+        description: "Server is running.",
+      });
+    } catch (err) {
+      next(err);
+    } finally {
+      console.log("Request to / endpoint");
+    }
+  });
+
 
 app.use("/api/v1", appRouter);
 
 
-app.use((err, req, res, next) => {
-  console.error(err);
-  res.status(500).json({ message: "Internal Server Error" });
-});
+
 
 
 export default app;
