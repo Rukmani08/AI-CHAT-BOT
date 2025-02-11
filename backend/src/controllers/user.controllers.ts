@@ -3,6 +3,7 @@ import User from "../models/User.js"
 import {hash,compare} from 'bcrypt'
 import { createToken } from "../utils/token-manager.js"
 import { COOKIE_NAME } from "../utils/constants.js"
+import { COOKIE_URL } from "../utils/constants.js";
 
 export  const getAllUsers :RequestHandler= async (req:Request,res:Response,next:NextFunction) => {
    
@@ -32,13 +33,20 @@ export  const userSignup: RequestHandler = async (req:Request,res:Response,next:
 
      res.clearCookie(COOKIE_NAME, {
         httpOnly:true,
-        domain:"localhost", signed:true, path:"/",
+        domain:COOKIE_URL, 
+        signed:true,
+        path:"/",
       })    
 
      const token = createToken(user._id.toString(), user.email,  604800)
      const expires=new Date();
      expires.setDate(expires.getDate()+7)
-     res.cookie(COOKIE_NAME,token, {path:"/",  domain:"localhost", expires, httpOnly:true, signed:true,})
+     res.cookie(COOKIE_NAME,token, {
+        path:"/",  
+        domain:COOKIE_URL,
+        expires,
+        httpOnly:true, 
+        signed:true,})
 
         return res.status(201).json({message:"OK",name: user.name, email:user.email})
     } catch (error) {
@@ -64,7 +72,7 @@ export  const userLogin: RequestHandler= async (req:Request,res:Response,next:Ne
 
           res.clearCookie(COOKIE_NAME, {
             httpOnly:true,
-            domain:"localhost",
+            domain:COOKIE_URL,
             signed:true,
             path:"/",
           })    
@@ -72,7 +80,12 @@ export  const userLogin: RequestHandler= async (req:Request,res:Response,next:Ne
          const token = createToken(user._id.toString(), user.email,  604800)
          const expires=new Date();
          expires.setDate(expires.getDate()+7)
-         res.cookie(COOKIE_NAME,token, {path:"/",  domain:"localhost", expires, httpOnly:true, signed:true,})
+         res.cookie(COOKIE_NAME,token, {
+            path:"/", 
+            domain:COOKIE_URL,
+            expires,
+            httpOnly:true, 
+            signed:true,})
        
          return res.status(200).json({message:"OK",name: user.name, email: user.email})
     } catch (error) {
@@ -121,7 +134,7 @@ export  const userLogout : RequestHandler= async (req:Request,res:Response,next:
 
          res.clearCookie(COOKIE_NAME, {
             httpOnly: true,
-            domain: "localhost",
+            domain: COOKIE_URL,
             signed: true,
             path: "/",
         }) 
