@@ -3,7 +3,7 @@ import User from "../models/User.js"
 import {hash,compare} from 'bcrypt'
 import { createToken } from "../utils/token-manager.js"
 import { COOKIE_NAME } from "../utils/constants.js"
-import { COOKIE_URL } from "../utils/constants.js";
+
 
 export  const getAllUsers :RequestHandler= async (req:Request,res:Response,next:NextFunction) => {
    
@@ -33,9 +33,10 @@ export  const userSignup: RequestHandler = async (req:Request,res:Response,next:
 
      res.clearCookie(COOKIE_NAME, {
         httpOnly:true,
-        domain:COOKIE_URL, 
-        signed:true,
-        path:"/",
+         secure: true,
+         sameSite: "None",
+         signed:true,
+         path:"/",
       })    
 
      const token = createToken(user._id.toString(), user.email,  604800)
@@ -43,7 +44,8 @@ export  const userSignup: RequestHandler = async (req:Request,res:Response,next:
      expires.setDate(expires.getDate()+7)
      res.cookie(COOKIE_NAME,token, {
         path:"/",  
-        domain:COOKIE_URL,
+        secure: true,
+        sameSite: "None",
         expires,
         httpOnly:true, 
         signed:true,})
@@ -72,7 +74,8 @@ export  const userLogin: RequestHandler= async (req:Request,res:Response,next:Ne
 
           res.clearCookie(COOKIE_NAME, {
             httpOnly:true,
-            domain:COOKIE_URL,
+            secure: true,
+            sameSite: "None",
             signed:true,
             path:"/",
           })    
@@ -82,7 +85,8 @@ export  const userLogin: RequestHandler= async (req:Request,res:Response,next:Ne
          expires.setDate(expires.getDate()+7)
          res.cookie(COOKIE_NAME,token, {
             path:"/", 
-            domain:COOKIE_URL,
+            secure: true,
+            sameSite: "None",
             expires,
             httpOnly:true, 
             signed:true,})
@@ -134,7 +138,8 @@ export  const userLogout : RequestHandler= async (req:Request,res:Response,next:
 
          res.clearCookie(COOKIE_NAME, {
             httpOnly: true,
-            domain: COOKIE_URL,
+            secure: true,
+            sameSite: "None",
             signed: true,
             path: "/",
         }) 
