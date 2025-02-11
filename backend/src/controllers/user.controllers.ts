@@ -34,7 +34,7 @@ export  const userSignup: RequestHandler = async (req:Request,res:Response,next:
      res.clearCookie(COOKIE_NAME, {
         httpOnly:true,
          secure: true,
-         sameSite: "None",
+         sameSite: "none",
          signed:true,
          path:"/",
       })    
@@ -45,7 +45,7 @@ export  const userSignup: RequestHandler = async (req:Request,res:Response,next:
      res.cookie(COOKIE_NAME,token, {
         path:"/",  
         secure: true,
-        sameSite: "None",
+        sameSite: "none",
         expires,
         httpOnly:true, 
         signed:true,})
@@ -75,7 +75,7 @@ export  const userLogin: RequestHandler= async (req:Request,res:Response,next:Ne
           res.clearCookie(COOKIE_NAME, {
             httpOnly:true,
             secure: true,
-            sameSite: "None",
+            sameSite: "none",
             signed:true,
             path:"/",
           })    
@@ -86,7 +86,7 @@ export  const userLogin: RequestHandler= async (req:Request,res:Response,next:Ne
          res.cookie(COOKIE_NAME,token, {
             path:"/", 
             secure: true,
-            sameSite: "None",
+            sameSite: "none",
             expires,
             httpOnly:true, 
             signed:true,})
@@ -139,7 +139,7 @@ export  const userLogout : RequestHandler= async (req:Request,res:Response,next:
          res.clearCookie(COOKIE_NAME, {
             httpOnly: true,
             secure: true,
-            sameSite: "None",
+            sameSite: "none",
             signed: true,
             path: "/",
         }) 
